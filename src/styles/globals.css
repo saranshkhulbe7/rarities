@@ -5,3 +5,10 @@
 body{
   background-color: #f7f0ea;
 }
+.truncate-2-lines{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

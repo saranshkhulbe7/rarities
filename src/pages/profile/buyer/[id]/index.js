@@ -1,7 +1,15 @@
+import Navbar from "@/components/buyer/navbar";
+import Profile from "@/components/buyer/profile";
 import React from "react";
 
-function index() {
-  return <div>index</div>;
+function buyerDashboard() {
+  return (
+    <div>
+      <Navbar>
+        <Profile />
+      </Navbar>
+    </div>
+  );
 }
 
-export default index;
+export default buyerDashboard;
