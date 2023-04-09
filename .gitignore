@@ -1,0 +1,28 @@
+# Next.js
+.next
+
+# Dependencies
+node_modules
+
+# Production Build
+out
+
+# Local development env files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# MacOS files
+.DS_Store
+
+# Log files
+*.log
+
+# IDE settings
+.idea/
+.vscode/
+*.iml
+
+# Compiled Tailwind CSS
+src/styles/css/*.css
