@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-
 import BuyerNavbar from "@/components/buyer/navbar";
 import CountdownClock from "@/components/countdownClock";
-import Link from "next/link";
 import SellerNavbar from "@/components/seller/navbar";
 import { bids } from "@/db/bids";
 import { buyers } from "@/db/buyers";
@@ -11,7 +9,6 @@ import { convertToRupeesFormat } from "@/utilities/formatter";
 import { getCurrentUser } from "@/api/auth";
 import { products } from "@/db/products";
 import { sellers } from "@/db/sellers";
-import { useCookies } from "react-cookies";
 import { useRouter } from "next/router";
 
 const ProfilePage = (props) => {
@@ -19,11 +16,6 @@ const ProfilePage = (props) => {
   const [role, setRole] = useState("");
   const [id, setId] = useState(null);
   const router = useRouter();
-
-  useEffect(async () => {
-    const res = await getCurrentUser({ token: localStorage.getItem });
-    console.log(res);
-  }, [router.query]);
   useEffect(() => {
     console.log("bidding", buyers[id]?.current_biddings.length);
   }, [id]);

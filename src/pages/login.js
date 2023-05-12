@@ -23,6 +23,11 @@ const LoginPage = () => {
         if (res.status === 200 || res.status === 201) {
           toast.success("User logged in successfully!");
           const { role, _id, token } = res.data.data;
+          setCookie("authToken", token, {
+            path: "/",
+            maxAge: 7200, // Expires after 2hr
+            sameSite: true,
+          })
 
           if (role === "buyer") {
             router.push(`/user/${_id}`);
