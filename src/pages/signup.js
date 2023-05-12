@@ -86,6 +86,7 @@ const SignupPage = () => {
               <span className="label-text text-black">Role</span>
             </label>
             <select
+              value={role}
               className="select select-bordered max-w-md w-full bg-white text-[#e26536]"
               onChange={(e) => {
                 setRole(e.target.value);

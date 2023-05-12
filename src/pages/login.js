@@ -1,22 +1,38 @@
 import React, { useState } from "react";
 
-import { signin } from "@/api/auth";
+import { toast } from "react-toastify";
 import { validateLogin } from "@/utilities/validations";
 
 const LoginPage = () => {
   const handleLogin = async () => {
     try {
+      setIsLoading(true);
       let body = {
         email: email,
         password: password,
       };
-      validateLogin(body);
-      // const res = await signin(body);
-    } catch (err) {}
+      console.log(body);
+      if (validateLogin(body)) {
+        const res = await axios.post(
+          "https://rarities-backend.vercel.app/api/v1/auth/signin",
+          body
+        );
+        if (res.status === 200 || res.status === 201) {
+          toast.success("User logged in successfully!");
+          // router.push("/login");
+        } else {
+          toast.error("Error occurred in user creation.");
+        }
+      }
+    } catch (err) {
+      toast.error("Error occurred in user creation.");
+    } finally {
+      setIsLoading(false);
+    }
   };
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
+  const [email, setEmail] = useState("saranshkhulbe72@gmail.com");
+  const [password, setPassword] = useState("Saransh@123");
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <div className="min-h-[100vh] grid place-items-center">

@@ -1,7 +1,7 @@
+import Navbar from "@/components/seller/navbar";
 import React from "react";
-
 function index() {
-  return <div>index</div>;
+  return <Navbar>index</Navbar>;
 }
 
 export default index;
