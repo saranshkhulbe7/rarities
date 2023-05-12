@@ -2,8 +2,11 @@ import React, { useState } from "react";
 
 import { toast } from "react-toastify";
 import { validateLogin } from "@/utilities/validations";
+import { signin } from "@/api/auth";
+import { useRouter } from "next/router";
 
 const LoginPage = () => {
+  const router = useRouter();
   const handleLogin = async () => {
     try {
       setIsLoading(true);
@@ -13,18 +16,15 @@ const LoginPage = () => {
       };
       console.log(body);
       if (validateLogin(body)) {
-        const res = await axios.post(
-          "https://rarities-backend.vercel.app/api/v1/auth/signin",
-          body
-        );
+        const res = await signin(body);
+        console.log(res);
         if (res.status === 200 || res.status === 201) {
           toast.success("User logged in successfully!");
-          // router.push("/login");
-        } else {
-          toast.error("Error occurred in user creation.");
+          router.push("/");
         }
       }
     } catch (err) {
+      console.log(err);
       toast.error("Error occurred in user creation.");
     } finally {
       setIsLoading(false);
