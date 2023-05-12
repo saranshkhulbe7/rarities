@@ -11,9 +11,11 @@ import { convertToRupeesFormat } from "@/utilities/formatter";
 import { getCurrentUser } from "@/api/auth";
 import { products } from "@/db/products";
 import { sellers } from "@/db/sellers";
+import { useCookies } from "react-cookies";
 import { useRouter } from "next/router";
 
-const ProfilePage = () => {
+const ProfilePage = (props) => {
+  console.log(props);
   const [role, setRole] = useState("");
   const [id, setId] = useState(null);
   const router = useRouter();
@@ -280,3 +282,30 @@ const ProfilePage = () => {
 };
 
 export default ProfilePage;
+
+export async function getServerSideProps(ctx) {
+  const { req, res } = ctx;
+  const token = req.cookies.authToken;
+  if (!token) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+  const res2 = await getCurrentUser({ token: token });
+  if (res2.status === 200) {
+    return {
+      props: {
+        authToken: token,
+        data: res2.data,
+      },
+    };
+  }
+  return {
+    props: {
+      authToken: token,
+    },
+  };
+}
