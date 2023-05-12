@@ -22,7 +22,7 @@ const SignupPage = () => {
       console.log(body);
       if (validateSignUp(body)) {
         const res = await axios.post(
-          "rarities-backend.vercel.app/api/v1/auth/signup",
+          "https://rarities-backend.vercel.app/api/v1/auth/signup",
           body
         );
         if (res.status === 200 || res.status === 201) {
