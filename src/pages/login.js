@@ -2,11 +2,13 @@ import React, { useState } from "react";
 
 import { signin } from "@/api/auth";
 import { toast } from "react-toastify";
+import { useCookies } from "react-cookie";
 import { useRouter } from "next/router";
 import { validateLogin } from "@/utilities/validations";
 
 const LoginPage = () => {
   const router = useRouter();
+  const [cookie, setCookie] = useCookies();
   const handleLogin = async () => {
     try {
       setIsLoading(true);
@@ -21,7 +23,7 @@ const LoginPage = () => {
         if (res.status === 200 || res.status === 201) {
           toast.success("User logged in successfully!");
           const { role, _id, token } = res.data.data;
-          localStorage.setItem("token", token);
+
           if (role === "buyer") {
             router.push(`/user/${_id}`);
           } else if (role === "seller") {
