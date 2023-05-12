@@ -1,5 +1,8 @@
 import Head from "next/head";
+import Image from "next/image";
+import { useRouter } from "next/router";
 export default function Home() {
+  const router = useRouter();
   return (
     <>
       <Head>
@@ -8,7 +11,37 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="text-red-100"></main>
+      <main className="h-[100vh] grid place-items-center">
+        <div className="flex flex-col items-center gap-10">
+          <div className="h-72 w-72 rounded-lg overflow-hidden">
+            <Image
+              className="w-full h-full object-contain"
+              src={"/brandlogo/logo.png"}
+              alt={"/brandlogo/logo.png"}
+              height={1000}
+              width={1000}
+            />
+          </div>
+          <div className="flex flex-col md:flex-row gap-5">
+            <button
+              className="btn btn-wide drop-shadow-lg bg-white text-[#e26536] hover:bg-[#e26536] hover:text-white"
+              onClick={() => {
+                router.push("/login");
+              }}
+            >
+              Login
+            </button>
+            <button
+              className="btn btn-wide drop-shadow-lg bg-white text-[#e26536] hover:bg-[#e26536] hover:text-white"
+              onClick={() => {
+                router.push("/signup");
+              }}
+            >
+              Sign up
+            </button>
+          </div>
+        </div>
+      </main>
     </>
   );
 }
