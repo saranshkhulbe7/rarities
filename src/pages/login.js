@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
-import { toast } from "react-toastify";
-import { validateLogin } from "@/utilities/validations";
 import { signin } from "@/api/auth";
+import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import { validateLogin } from "@/utilities/validations";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -14,13 +14,23 @@ const LoginPage = () => {
         email: email,
         password: password,
       };
-      console.log(body);
+
       if (validateLogin(body)) {
         const res = await signin(body);
-        console.log(res);
+
         if (res.status === 200 || res.status === 201) {
           toast.success("User logged in successfully!");
-          router.push("/");
+          const { role, _id, token } = res.data.data;
+          localStorage.setItem("token", token);
+          if (role === "buyer") {
+            router.push(`/user/${_id}`);
+          } else if (role === "seller") {
+            router.push(`/user/${_id}`);
+          } else if (role === "admin") {
+            router.push("/user/${_id}");
+          } else {
+            router.push("/");
+          }
         }
       }
     } catch (err) {

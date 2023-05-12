@@ -8,14 +8,20 @@ import { bids } from "@/db/bids";
 import { buyers } from "@/db/buyers";
 import { categories } from "@/db/categories";
 import { convertToRupeesFormat } from "@/utilities/formatter";
+import { getCurrentUser } from "@/api/auth";
 import { products } from "@/db/products";
 import { sellers } from "@/db/sellers";
 import { useRouter } from "next/router";
 
 const ProfilePage = () => {
-  const role = "seller";
+  const [role, setRole] = useState("");
   const [id, setId] = useState(null);
   const router = useRouter();
+
+  useEffect(async () => {
+    const res = await getCurrentUser({ token: localStorage.getItem });
+    console.log(res);
+  }, [router.query]);
   useEffect(() => {
     console.log("bidding", buyers[id]?.current_biddings.length);
   }, [id]);
