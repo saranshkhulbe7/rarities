@@ -6,7 +6,7 @@ import { useCookies } from "react-cookie";
 import { useRouter } from "next/router";
 import { validateLogin } from "@/utilities/validations";
 
-const LoginPage = () => {
+const LoginPage = (props) => {
   const router = useRouter();
   const [cookie, setCookie] = useCookies();
   const handleLogin = async () => {
@@ -27,12 +27,12 @@ const LoginPage = () => {
             path: "/",
             maxAge: 7200, // Expires after 2hr
             sameSite: true,
-          })
+          });
 
           if (role === "buyer") {
-            router.push(`/user/${_id}`);
+            router.push(`/profile/buyer/1`);
           } else if (role === "seller") {
-            router.push(`/user/${_id}`);
+            router.push(`/profile/buyer/1`);
           } else if (role === "admin") {
             router.push("/user/${_id}");
           } else {

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import BuyerNavbar from "@/components/buyer/navbar";
 import CountdownClock from "@/components/countdownClock";
 import SellerNavbar from "@/components/seller/navbar";
@@ -12,8 +13,9 @@ import { sellers } from "@/db/sellers";
 import { useRouter } from "next/router";
 
 const ProfilePage = (props) => {
-  console.log(props);
-  const [role, setRole] = useState("");
+  console.log("props", props.data.data);
+  const { email, name } = props.data.data;
+  const [role, setRole] = useState(props.data.data.role);
   const [id, setId] = useState(null);
   const router = useRouter();
   useEffect(() => {
@@ -35,9 +37,12 @@ const ProfilePage = (props) => {
                 <div className="hero-content flex-col gap-20 lg:flex-row-reverse">
                   <div className="max-w-[190px] min-w-[190px]">
                     {id && (
+                      //   <img
+                      //     src={`/profile_pics/buyer${1}.jpg`}
+                      //     className="max-w-sm rounded-lg shadow-2xl object-contain h-full w-full"
+                      //   />
                       <img
-                        src={`/profile_pics/buyer${id}.jpg`}
-                        className="max-w-sm rounded-lg shadow-2xl object-contain h-full w-full"
+                        src={`https://avatars.githubusercontent.com/u/55129013?v=4`}
                       />
                     )}
                   </div>
@@ -45,7 +50,7 @@ const ProfilePage = (props) => {
                   <div className="max-w-[850px]">
                     {id && (
                       <h1 className="text-5xl font-bold text-primary">
-                        {buyers[id].name}
+                        {/* {buyers[id].name} */}
                       </h1>
                     )}
                     <p className="py-6 text-ternary">
@@ -74,7 +79,7 @@ const ProfilePage = (props) => {
                         </div>
                         {id && (
                           <div className="stat-value">
-                            {convertToRupeesFormat(buyers[id].account_balance)}
+                            {/* {convertToRupeesFormat(buyers[id].account_balance)} */}
                           </div>
                         )}
                         <div className="stat-actions">

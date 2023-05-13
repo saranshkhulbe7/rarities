@@ -62,7 +62,10 @@ function Navbar({ children }) {
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="w-14 rounded-full">
-                  <img src={`/profile_pics/buyer${id}.jpg`} />
+                  {/* <img src={`/profile_pics/buyer${1}.jpg`} /> */}
+                  <img
+                    src={`https://avatars.githubusercontent.com/u/55129013?v=4`}
+                  />
                 </div>
               </label>
               <ul
